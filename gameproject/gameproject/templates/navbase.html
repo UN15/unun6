@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOG welcome!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+    
+</head>
+<style>
+body {
+    text-align: center;
+    font-family: "Arial Black", sans-serif;
+    background: url('https://pbs.twimg.com/media/EK7XgZ4U4AAAKPc?format=jpg&name=4096x4096');
+    background-size: 105%;
+  }
+
+.main {
+    position: relative;
+    left: 36%;
+    color: black;
+    font-family: "Arial Black", sans-serif;
+  }
+.user{
+    text-align: left;
+  }
+.sub{
+      width:600px;
+      height:relative;
+      position: relative;
+      left: 31%;
+      background-color: white;
+  }
+.new {
+        position: relative;
+        left: 33%;
+        width: 600px;
+        height: relative;
+        border: 1px solid white;
+        background-color: rgba(255, 255, 255, 0.5);
+        color: black;
+        border-radius: 15px;
+        font-family: "Arial Black", sans-serif;
+    }
+.edit {
+        position: relative;
+        left: 33%;
+        width: 600px;
+        height: relative;
+        border: 1px solid white;
+        background-color: rgba(255, 255, 255, 0.5);
+        color: black;
+        border-radius: 15px;
+        font-family: "Arial Black", sans-serif;
+    }
+.flip-box {
+    width: 500px;
+    height: 350px;
+    perspective: 1000px;
+    border: 1px solid white;
+}
+.flip-box:hover .flip {
+    transform: rotateY(-180deg);
+}
+.flip {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    color: white;
+    text-align: center;
+    line-height: 400px;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    transition: .5s;
+    border: 1px solid white;
+}
+.front, .back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+}
+.front {
+    background: linear-gradient(to right, #e1eec3, #f05053); 
+}
+.back {
+    background: linear-gradient(to right, #d66d75, #e29587);
+    transform: rotateY(180deg);
+}
+
+.title {
+    font-family: "Arial Black", sans-serif;
+    text-shadow: 2px 6px 2px gray;
+    font-weight: bold;
+    color: white;
+    width:800px;
+    position: relative;
+    left: 25%;
+  }
+
+.container-fluid {
+    background:linear-gradient(to right, #d1913c, #ffd194);
+  }
+
+</style>
+
+<body>
+    {% load static %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'gamemain' %}">
+                <img src="{% static 'Cookie_Run.png' %}" alt="" width="70" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Login&Signup&Logout//Write new page
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% if not user.is_authenticated %}
+                                <li><a class="dropdown-item" href="{% url 'acc_login' %}">LOGIN</a></li>
+                                <li><a class="dropdown-item" href="{% url 'acc_signup' %}">SIGN UP</a></li>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                                <li><a class="dropdown-item" href="{% url 'gamenew' %}">Write</a></li>
+                                <li><a class="dropdown-item" href="{% url 'acc_logout' %}">LOGOUT</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <img src="{% static 'brave.png' %}" alt="" width="60" height="50">
+            <img src="{% static 'happy.png' %}" alt="" width="60" height="50">
+            <img src="{% static 'sea.png' %}" alt="" width="60" height="50">
+            <img src="{% static 'flower.png' %}" alt="" width="60" height="50">
+            <img src="{% static 'wind.png' %}" alt="" width="60" height="50">
+        </div>
+    </nav>
+    
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

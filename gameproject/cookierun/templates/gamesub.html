@@ -1,0 +1,25 @@
+{% extends 'navbase.html' %}
+{% block content %}
+
+<span>{{gsub.title}}</span>
+<div>
+    <br>
+    {{gsub.writer}}
+    {{gsub.pub_date}}
+    <hr size="5" color="black">
+    <br>
+    <div class="sub">
+        {% if gsub.image %}
+        <p><img src="{{gsub.image.url}}" alt="" width="500" height="200"></p>
+        {% endif %}
+        <p>{{gsub.body}}</p>
+    </div>
+</div>
+<span>
+    <a href="{% url 'gameedit' gsub.id %}">수정하기</a>
+</span>
+<span>
+    <a href="{% url 'gamedelete' gsub.id %}">삭제하기</a>
+</span>
+
+{% endblock %}

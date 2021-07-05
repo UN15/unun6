@@ -1,0 +1,57 @@
+{% extends 'navbase.html' %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <div class="user">
+    [Username]:{{user.username}}<br>
+    [nickname]:{{user.nickname}}<br>
+    [guild]:{{user.guildname}}<br>
+    [location]:{{user.location}}<br>
+    {{user.nickname}}님 반갑습니다!
+    </div>
+    {% endif %}
+    <br><br>
+    <h1 class="title">CookieRun</h1>
+    마우스를 올려 글을 확인하세요
+    <br><br>
+{% for g_obj in g_posts %}
+<br>
+<div class="main">
+    <br>
+    <div class="flip-box">
+        <div class="flip">
+            <div class ="front">
+                {% if g_obj.image %}
+                <p><img src="{{g_obj.thumbnail.url}}"></p>
+                {% endif %}
+            </div>
+            <div class="back">
+                    <h3>{{g_obj.title}}</h3>
+                    {{g_obj.writer}}/
+                    {{g_obj.summary}}
+                    <a href="{% url 'gamesub' g_obj.id %}">...more</a>
+                    <br><br>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+{% endfor %}
+
+<div class="container">
+    <br><br>
+    {%if g_posts.has_previous %}
+    <a href ="?g_page=1">first_page</a>
+    <a href ="?g_page={{g_posts.previous_page_number}}">previous</a>
+    {% endif %}
+
+    <span>{{g_posts.number}}</span>
+    <span>of</span>
+    <span>{{g_posts.paginator.num_pages}}</span>
+
+    {% if g_posts.has_next %}
+    <a href ="?g_page={{g_posts.next_page_number}}">Next</a>
+    <a href ="?g_page={{g_posts.paginator.num_pages}}">Last</a>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'navbase.html' %}
+{% block content %}
+<br>
+<div class="new">
+    <h1>Login page</h1>
+    <form action="{% url 'acc_login' %}" method="post">
+        {% csrf_token %}
+        {{l_form.as_p}}
+        <button type="submit">제출하기</button>
+    </form>
+</div>
+{% endblock %}
