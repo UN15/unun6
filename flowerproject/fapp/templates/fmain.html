@@ -1,0 +1,25 @@
+{% extends 'navbase.html' %}
+{% block content %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% if user.is_authenticated %}
+<div class="log">{{user.username}} 님이 로그인 중</div>
+{% else %}
+<div class="log">로그인 후 이용해주세요.</div>
+{% endif %}
+<br><br><br>
+{% for fobj in mainobj %}
+
+<div class="main">
+    {% if fobj.image %}
+    <p><img src="{{fobj.thumbnail.url}}"></p>
+    {% endif %}
+    <h3>{{fobj.title}}</h3>
+    {{fobj.writer}}/
+    {{fobj.summary}}
+    <a href="{% url 'fsub' fobj.id %}">...more</a>
+</div>
+
+{% endfor %}
+
+{% endblock %}

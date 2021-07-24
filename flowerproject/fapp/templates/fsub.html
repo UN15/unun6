@@ -1,0 +1,29 @@
+{% extends 'navbase.html' %}
+{% block content %}
+
+<h4 class="title">{{subobj.title}}</h4>
+<div class="s">
+    <br>
+    {{subobj.writer}}
+    {{subobj.pub_date}}
+    <hr size="5" color="black"><br>
+    <div class="sub">
+        {% if subobj.image %}
+        <p><img src="{{subobj.image.url}}" alt="" width="500" height="400"></p>
+        {% endif %}
+        <p>{{subobj.body}}</p>
+    </div>
+</div>
+<div class="wrap">
+    <button class="button">
+        <a href="{% url 'fedit' subobj.id %}">수정하기</a>
+    </button>
+</div>
+<div class="wrap">
+    <button class="button">
+
+        <a href="{% url 'fdelete' subobj.id %}">삭제하기</a>
+    </button>
+</div>
+
+{% endblock %}
