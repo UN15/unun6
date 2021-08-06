@@ -1,0 +1,12 @@
+{% extends 'navbase.html' %}
+{% block content %}
+<br>
+<div class="new">
+    <h1>쪽지를 작성하세요</h1>
+    <form action="{% url 'mnew' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{mform.as_p}}
+        <button type="submit">제출하기</button>
+    </form>
+</div>
+{% endblock %}

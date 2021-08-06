@@ -1,0 +1,16 @@
+{% extends 'navbase.html' %}
+{% block content %}
+<br><br>
+<div class="mm">
+    제목:&nbsp;{{m_sub.title}}
+</div>
+<div class="mm">
+    보낸이:&nbsp;
+    {{m_sub.sender}}
+</div>
+<div class="mm2">
+    <p>{{m_sub.body}}</p>
+</div>
+</div>
+
+{% endblock %}

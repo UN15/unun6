@@ -1,0 +1,20 @@
+{% extends 'navbase.html' %}
+{% block content %}
+<hr>
+<ul>
+    <li class="ll"><a href="{% url 'mmain' %}">받은 쪽지</a></li>
+    <li class="ll"><a href="{% url 'mnew' %}">쪽지 작성하러 가기</a></li>
+    <li class="ll"><a href="{% url 'msend' %}">보낸 쪽지</a></li>
+</ul>
+<hr>
+<br><br>
+{% for mobj in m_send %}
+{% if mobj.sender == user.username %}
+<div class="m">
+    {{mobj.sender}}
+    &nbsp;|&nbsp;
+    <a href="{% url 'msub' mobj.id %}">{{mobj.title}}</a>
+</div>
+{% endif %}
+{% endfor %}
+{% endblock %}

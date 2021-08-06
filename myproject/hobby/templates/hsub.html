@@ -1,0 +1,29 @@
+{% extends 'navbase.html' %}
+{% block content %}
+
+<div class="s">
+<h4 class="title">{{h_sub.title}}</h4>
+    <br>
+    {{h_sub.writer}}
+    {{h_sub.pub_date}}
+</div>
+    <hr size="5"><br>
+    <div class="sub">
+        {% if h_sub.image %}
+        <p><img src="{{h_sub.image.url}}" alt="" width="500" height="400"></p>
+        {% endif %}
+        <p>{{h_sub.body}}</p>
+    </div>
+<br>
+<div class="wrap">
+    <button class="button">
+        <a href="{% url 'hedit' h_sub.id %}">수정하기</a>
+    </button>
+</div>
+<div class="wrap">
+    <button class="button">
+        <a href="{% url 'hdelete' h_sub.id %}">삭제하기</a>
+    </button>
+</div>
+<br><br>
+{% endblock %}

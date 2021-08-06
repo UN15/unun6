@@ -1,0 +1,20 @@
+{% extends 'navbase.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+&nbsp;<span class="p">{{user.nickname}}님 반갑습니다!</span> 
+{% endif %}
+<br><br><br>
+{% for hobj in h_main %}
+
+<div class="main">
+    {% if hobj.image %}
+    <p><img src="{{hobj.thumbnail.url}}"></p>
+    {% endif %}
+    <h3>{{hobj.title}}</h3>
+    {{hobj.writer}}/
+    {{hobj.summary}}
+    <a href="{% url 'hsub' hobj.id %}">...more</a>
+</div>
+
+{% endfor %}
+{% endblock %}

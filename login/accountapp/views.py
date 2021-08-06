@@ -13,14 +13,14 @@ def acc_login(request):
             if user is not None:
                 login(request, user)
 
-        return redirect("gamemain")
+        return redirect("hmain")
     else:
         l_form=AuthenticationForm()
         return render(request, 'acc_login.html', {'l_form':l_form})
 
 def acc_logout(request):
     logout(request)
-    return redirect('gamemain')
+    return redirect('hmain')
 
 def acc_register(request):
     if request.method == "POST":
@@ -28,7 +28,7 @@ def acc_register(request):
         if l_form.is_valid():
             user = l_form.save()
             login(request, user)
-        return redirect("gamemain")
+        return redirect("hmain")
     else:   
         l_form = Acc_registerForm()
         return render(request,'acc_signup.html', {'l_form':l_form})
