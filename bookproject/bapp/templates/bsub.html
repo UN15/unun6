@@ -1,0 +1,53 @@
+{% extends 'navbase.html' %}
+{% block content %}
+
+<h4 class="title">{{sub.title}}</h4>
+<div class="s">
+    <br>
+    {{sub.writer}}
+    {{sub.pub_date}}
+    <hr size="5" color="black"><br>
+    <div class="sub">
+        {% if sub.image %}
+        <p><img src="{{sub.image.url}}" alt="" width="400" height="400"></p>
+        {% endif %}
+
+        {% for t in c_list %}
+        {% if not '#' in t %}
+        {{t}}
+        {% else %}
+        <a onclick="getA(this)" href="#">{{t}}</a>
+        {% endif %}
+        {% endfor %}
+
+    </div>
+</div>
+<div class="wrap">
+    <button class="button">
+        <a href="{% url 'bedit' sub.id %}">수정하기</a>
+    </button>
+</div>
+<div class="wrap">
+    <button class="button">
+        <a href="{% url 'bdelete' sub.id %}">삭제하기</a>
+    </button>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+ 
+<script type="text/javascript">
+function getA(a) {
+    var getA = $(a).text();
+    $.ajax({
+      type: 'POST',
+      url: "{% url 'hashtag' %}",
+      data: {
+        'tag' : getA,
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      dataType: "json",
+    })
+  }
+</script>
+
+{% endblock %}

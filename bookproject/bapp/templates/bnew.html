@@ -1,0 +1,13 @@
+{% extends 'navbase.html' %}
+{% block content %}
+<br>
+<div class="new">
+    <h1>Write your new blogpage</h1>
+    <h6>해시태그를 달고 싶으시면 body 부분에 해시태그를 작성해주시면 됩니다.<br> ex) 안녕하세요 #책</h6>
+    <form action="{% url 'bnew' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{bform.as_p}}
+        <button type="submit">제출하기</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'navbase.html' %}
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>간단한 지도 표시하기</title>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=j1okbls897"></script>
+</head>
+
+<body>
+    <br><br>
+    <div id="map" style="width:50%; height:400px; float: left; padding-right: 20px;"></div>
+    <script>
+        var map = new naver.maps.Map('map', {
+            center: new naver.maps.LatLng(37.5710,126.9778),
+            zoom: 15
+        });
+
+        var marker = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.5710,126.9778),
+            map: map
+        });
+    </script>
+    <div class="hash">
+        <form class="d-flex" method='post' action="{% url 'hashtag' %}">
+            {% csrf_token %}
+            <input type="search" placeholder="해시태그 검색" name="search_button"aria-label="Search" class="form-control me-2">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form><br>
+        <h7>해시태그 검색창입니다. 검색하실 때 #을 붙이고 검색해주세요.</h7>
+    </div>
+    <br>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        {% for bobj in main %}
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">{{bobj.title}}</h4>
+                </div>
+                <div class="card-body">
+                    {% if bobj.image %}
+                    <p><img src="{{bobj.thumbnail.url}}"></p>
+                    {% endif %}
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>{{bobj.writer}}</li>
+                        <li>{{bobj.summary}}</li>
+                        <li>{{bobj.pub_date}}</li>
+                        <li><a href="{% url 'bsub' bobj.id %}">...more</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>  
+</body>
+
+{% endfor %}
+{% endblock %}

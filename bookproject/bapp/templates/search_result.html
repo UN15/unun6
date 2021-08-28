@@ -1,0 +1,31 @@
+{% extends 'navbase.html' %}
+{% block content %}
+<div class="content">
+  <div id="hashtag_posting">
+    {% if post_ %}
+    <img src="{{post_.thumbnail.url }}">
+    {% else %}
+    <img id="photo">
+    {% endif %}
+    <div id="hashtag">{{ keyword }}</div>
+    <div id="hashtag_count">게시글 {{ post.count }}개</div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+  <div id="title">{{ keyword }}과 관련된 게시물</div>
+</div>
+
+
+  {% for post in post.all %}
+  <div class="ss">
+  {% if post.image %}
+  <p><img src="{{post.thumbnail.url}}"></p>
+  {% endif %}
+  <a href="{% url 'bsub' post.id %}">{{post.title}}</a> 
+</div>
+{% endfor %}
+
+{% endblock %}
